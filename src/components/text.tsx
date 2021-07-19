@@ -19,3 +19,7 @@ export const CenterText = styled(Text)`
   margin-left: auto;
   margin-right: auto;
 `
+
+export const HighlightText = styled(Text)`
+  color: #833DB4
+`
