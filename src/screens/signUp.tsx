@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components'
-import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Button, TouchableOpacity, TextInput, Keyboard } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-import { TextButton, BigRoundedButton } from '../../src/components/toucable';
+import { BigRoundedButton } from '../../src/components/touchable';
 import { BigRoundedButtonText, BoldText, CenterText } from '../../src/components/text'
 import { PhoneNumberInput, PhoneNumberPicker } from '../../src/components/input'
 
@@ -17,8 +17,8 @@ export default function SignUpScreen({ navigation }) {
 
 
   return (
-    <View>
-      <VerifyText>
+    <SafeAreaView>
+      {/* <VerifyText>
         Verify your phone number to start
       </VerifyText>
       <View style={{
@@ -48,23 +48,29 @@ export default function SignUpScreen({ navigation }) {
           autoFocus={true}>
         </PhoneNumberInput>
       </View>
-
-      <TextButton>
-        <Text style={{
-          flexWrap: 'wrap',
-          alignItems: 'flex-start',
-        }}>
-          By clicking Sign up, you agree to our Terms of Use and Privacy Policy
-        </Text>
-      </TextButton>
+      <Text style={textStyles.termPolicy}>
+        {/* By clicking Sign up, you agree to our */}
+      {/* <TextButton> Terms of Use </TextButton>
+        <Text> and Privacy Policy</Text>
+      </Text>
       <SignUpButton>
         <BigRoundedButtonText>
           SIGN UP
         </BigRoundedButtonText>
-      </SignUpButton>
-    </View >
+      </SignUpButton> */}
+    </SafeAreaView >
   )
 }
+
+const textStyles = StyleSheet.create({
+  termPolicy: {
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+  SignUpButton: {
+    marginTop: "150%"
+  }
+})
 
 const SignUpButton = styled(BigRoundedButton)`
   margin-top: 130%;

@@ -1,37 +1,65 @@
 import React from 'react';
-import styled from 'styled-components'
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
-// import { SafeAreaView } from 'react-native-safe-area-view';
+import { StyleSheet, Text, View, Switch, TouchableOpacity, SafeAreaView } from 'react-native';
 
-import { TextButton, BigRoundedButton } from '../../src/components/toucable';
-import { BigRoundedButtonText, BoldText } from '../../src/components/text'
-// import { SignUpScreen } from '../../src/screens/signUp'
+import { BigRoundedButton } from '../../src/components/touchable';
+import { BigRoundedButtonText } from '../../src/components/text'
 
 export default function OnboardingScreen({ navigation }) {
-  const pressSignUpHandler = () => {
-    navigation.push('SignUpScreen')
-  }
-
-  const pressSignInHandler = () => {
-    navigation.push('SignInScreen')
-  }
-
+  const [isEnabled, setIsEnabled] = React.useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   return (
-    <View>
-      <BigRoundedButton
-        onPress={pressSignUpHandler}>
-        <BigRoundedButtonText>
-          Let's get started
-        </BigRoundedButtonText>
-      </BigRoundedButton>
-      <TextButton>
-        <Text>Already have account? </Text>
-        <TouchableOpacity onPress={pressSignInHandler} >
-          <BoldText>Sign in</BoldText>
-        </TouchableOpacity>
-      </TextButton>
-    </View >
+    <SafeAreaView style={{ flexDirection: 'column', height: '100%' }}>
+      <View style={{ height: '8%' }} />
+      <View style={{ height: '3%' }}>
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+          style={switchStyles.switch}
+        />
+      </View>
+      <View style={{ height: '68%' }} />
+      <View style={{ height: '5%' }}>
+        <BigRoundedButton
+          onPress={() => { navigation.push('SignUpScreen') }}
+          style={buttonStyles.signUpButton} >
+          <BigRoundedButtonText>
+            Let's get started
+          </BigRoundedButtonText>
+        </BigRoundedButton>
+      </View>
+      <View style={{ height: '3.5%' }} />
+      <View style={{ height: '3.5%' }}>
+        <View style={buttonStyles.signInButton}>
+          <Text>Already have account?</Text>
+          <TouchableOpacity
+            onPress={() => { navigation.push('SignInScreen') }}>
+            <Text style={{ fontWeight: 'bold' }}> Sign in</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </SafeAreaView >
   )
 }
+
+const switchStyles = StyleSheet.create({
+  switch: {
+    marginLeft: '80%',
+    marginRight: '10%',
+  },
+})
+
+const buttonStyles = StyleSheet.create({
+  signUpButton: {
+  },
+  signInButton: {
+    height: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    flexDirection: 'row',
+  },
+})
 
 // export default OnboardingScreen
